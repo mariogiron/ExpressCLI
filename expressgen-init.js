@@ -8,8 +8,6 @@ const exec = require('child_process').exec
 const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
-const CLI = require('clui');
-const Spinner = CLI.Spinner;
 const ora = require('ora')
 const ejs = require('ejs')
 const path = require('path')
@@ -60,8 +58,6 @@ inquirer.prompt(questions).then(answers => {
         `./${mainDir.trim()}/public/stylesheets`
     ]
 
-    // let status = new Spinner('Recovering npm libraries version...        ', ['◜', '◠', '◝', '◞', '◡', '◟']);
-    // status.start()
     const spinner = ora('Recovering npm libraries version...').start();
 
     shell.mkdir('-p', ...directories);
@@ -87,8 +83,6 @@ inquirer.prompt(questions).then(answers => {
 
         fs.writeFileSync(`./${mainDir}/package.json`, JSON.stringify(packageJson, null, 4))
 
-        // status.message('Installing npm dependencies...                  ')
-
         spinner.succeed('Recovering npm libraries version...')
         spinner.color = 'yellow';
         spinner.text = 'Installing npm dependencies...';
@@ -99,7 +93,6 @@ inquirer.prompt(questions).then(answers => {
                 console.log('Error. ' + err.message)
                 process.exit(-1)
             }
-            // status.message('Creating project structure...  )
             spinner.succeed('Installing npm dependencies...')
             spinner.color = 'blue';
             spinner.text = 'Creating project structure...';

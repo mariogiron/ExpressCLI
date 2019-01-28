@@ -15,16 +15,14 @@ Simple tool to manage Express generated apps
 ### Download & Installation
 
 ```shell 
-$ npm install expressgen
+$ npm install expressgen -g
 ```
 
-### Code Demo
+### How to use
 
 ```javascript 
 
-let tokengen = require('expressgen')
-
-express
+expressgen init
 
 ```
 
