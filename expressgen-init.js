@@ -11,6 +11,7 @@ const figlet = require('figlet');
 const ora = require('ora')
 const ejs = require('ejs')
 const path = require('path')
+const emoji = require('node-emoji')
 
 program
     .option('-v --view <view>', 'Select view engine pug/hbs/none', /^(pug|hbs)$/i)
@@ -42,7 +43,7 @@ let questions = [
 inquirer.prompt(questions).then(answers => {
 
     let mainDir = program.dir || answers.dir
-    let viewEngine = program.view || answers.view
+    program.view = program.view || answers.view
 
     if (fs.existsSync(`./${mainDir}`)) {
         console.log('This directory already exists')
@@ -98,7 +99,7 @@ inquirer.prompt(questions).then(answers => {
             spinner.text = 'Creating project structure...';
             spinner.start()
 
-            let viewEngine = program.view === 'none' ? null : program.view
+            let viewEngine = program.view === 'none' ? null : program.view            
 
             let app = loadTemplate('app.js')
             app.locals.view = viewEngine
@@ -127,7 +128,9 @@ inquirer.prompt(questions).then(answers => {
                 fs.writeFileSync(path.join(mainDir, `views/error.${viewEngine}`), errorView.render())
             }
 
-            spinner.succeed('Todo correcto')
+            spinner.succeed('Finished')
+
+            success(mainDir)
             
         })
     })
@@ -172,4 +175,23 @@ function loadTemplate(name) {
         locals: locals,
         render: render
     }
+}
+
+function success(mainDir) {
+    let log = console.log
+    log('\n')
+    log(chalk.blue.underline.bold('Project created successfully'))
+    log('\n')
+
+    log(chalk.gray('** STEP 1 **'))
+    log()
+    log(chalk.green.bold(`  $ cd ${mainDir}`))
+    log('\n')
+
+    log(chalk.gray('** STEP 2 **'))
+    log()
+    log(chalk.green.bold(`  $ npm start`))
+
+    log('\n')
+    log(emoji.get('heart'), ' ¡Enjoy! ', emoji.get('heart'))
 }

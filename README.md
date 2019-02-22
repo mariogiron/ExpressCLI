@@ -1,6 +1,6 @@
 # Express CLI
 
-![Versión](https://img.shields.io/badge/npm-v2.6.1-blue.svg)
+![Versión](https://img.shields.io/badge/npm-v2.8.1-blue.svg)
 [![install size](https://packagephobia.now.sh/badge?p=@mariogironm/tokengen)](https://packagephobia.now.sh/result?p=@mariogironm/tokengen)
 
 

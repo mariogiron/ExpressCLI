@@ -8,10 +8,14 @@ const program = require('commander')
 const CLI = require('clui');
 const Spinner = CLI.Spinner;
 const globals = require('./globals')
+const expgen = require('./expressgen-generate')
 
 program
   .version('0.0.1')
   .description('Express Project Manager')
-  .command('init [name]', 'install one or more packages').alias('i')
-  .command('generate <type> <name>', 'search with optional query').alias('g')
+  .command('init', 'create new ExpressJS project').alias('i')  
+  .command('generate <type> <name>', 'generate different files for your ExpressJS projects').alias('g')
+  .action((cmd, type, name) => {
+    expgen(type, name)
+  })
 .parse(process.argv);
